@@ -3,7 +3,7 @@ max = 99
 index = 50
 answer = 0
 
-with open('demo.txt', 'r') as input:
+with open('input.txt', 'r') as input:
 
     for line in input.readlines():
         line = line.strip()
@@ -26,6 +26,6 @@ with open('demo.txt', 'r') as input:
         index = new_index
         answer += 1 if index == 0 else 0
 
-        print(f"Line: {line}, New Index: {new_index}")
+        # print(f"Line: {line}, New Index: {new_index}")
 
 print(answer)
