@@ -17,7 +17,7 @@ for rng in rngs:
     for num in range(rng[0], rng[1] + 1):
         num_str = str(num)
         num_len = len(num_str)
-        if num_len % 2 == 1:
+        if num_len == 0 or num_len % 2 == 1:
             continue
 
         half_len = int(num_len / 2)
