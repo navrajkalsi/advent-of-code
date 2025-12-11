@@ -1,8 +1,6 @@
 import math
 
 answer = 0
-final_connections = 1000
-
 debug = False
 
 lines = []
@@ -33,7 +31,7 @@ def simplify_circuits():
             for pop_index in found_indices[1:]:
                 circuits.pop(pop_index)
 
-with open('demo.txt', 'r') as input:
+with open('input.txt', 'r') as input:
     lines = [line.strip().split(',') for line in input.readlines()]
 
 if debug:
@@ -58,12 +56,10 @@ if debug:
     for dist in distances:
         print(dist)
 
-connections = 0
+last_boxes = []
 for dist in distances:
-    if connections >= final_connections:
-        break
     found = False
-    
+
     if debug:
         print("\nChecking for dist: ", dist)
 
@@ -106,15 +102,15 @@ for dist in distances:
             print("New number of circuits: ", len(circuits))
 
     simplify_circuits() # if a box is found to be in two different circuits, join the circuits
-
-    connections += 1
-
-print(f"Connections made: {connections}")
+    
+    if len(circuits) == 1 and len(circuits[0]) == len(lines): # checking if all the boxes combined
+        last_boxes = [dist['first'], dist['second']]
+        break
 
 # sort to get the largest circuits first
 circuits.sort(key=len, reverse=True)
 
-answer = len(circuits[0]) * len(circuits[1]) * len(circuits[2])
+answer = int(last_boxes[0][0]) * int(last_boxes[1][0])
 
 if debug:
     print("\nCircuits:")
