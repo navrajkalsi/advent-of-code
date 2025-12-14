@@ -1,6 +1,6 @@
 answer = 0
 
-debug = False
+debug = True
 
 devices = []
 start = -1
@@ -31,9 +31,9 @@ def follow_device(name, state):
                 print()
         else:
             if debug:
-                print('\nCould not found `out`')
+                print('\nFound `out`, without `dac` or `fft`')
         return
-    elif name == 'svr': # loop
+    elif name in state['path']: # loop
         return
 
     index = get_device_index(name)
@@ -42,6 +42,7 @@ def follow_device(name, state):
 
 with open('input.txt', 'r') as input:
     devices = [line.strip() for line in input.readlines()]
+    # devices = devices[:100]
     for index, device in enumerate(devices):
         device = device.split(': ')
         devices[index] = {'device': device[0], 'outputs': device[1].split()}
